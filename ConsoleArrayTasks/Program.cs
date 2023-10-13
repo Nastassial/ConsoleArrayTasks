@@ -10,7 +10,7 @@ while (taskNum <= taskNumAll)
     {
         case 1:
             Console.WriteLine("Первые 11 чисел последовательности Фибоначчи:");
-            ShowFibonacciNumList(11);
+            ShowArray(GetFibonacciNumList(11));
 
             break;
 
@@ -25,7 +25,7 @@ while (taskNum <= taskNumAll)
             monthCnt = int.Parse(Console.ReadLine());
 
             Console.WriteLine($"Сумма вклада с процентами за {monthCnt} месяцев:");
-            Console.WriteLine(GetDepositSum(depositSum, monthCnt));
+            Console.WriteLine(GetDepositSum(depositSum, monthCnt, 0.07f));
 
             break;
 
@@ -125,24 +125,27 @@ static void ShowStringArray(string[] array)
     Console.WriteLine();
 }
 
-static void ShowFibonacciNumList(int num)
+static int[] GetFibonacciNumList(int num)
 {
     int res = 0, sum = 1, tmp;
+    int[] resFibonacciList = new int[num];
 
     for (int i = 0; i < num; i++)
     {
-        Console.Write(res + " ");
+        resFibonacciList[i] = res;
         tmp = res;
         res = sum;
         sum += tmp;
     }
+
+    return resFibonacciList;
 }
 
-static float GetDepositSum(float sum, int monthCnt)
+static float GetDepositSum(float sum, int monthCnt, float procent)
 {
     for (int i = 0; i < monthCnt; i++)
     {
-        sum += sum * 0.07f;
+        sum += sum * procent;
         //Console.WriteLine(depositSum + " " + (i + 1) + " месяц");
     }
 
